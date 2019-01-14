@@ -14,7 +14,20 @@ Vagrant.configure(2) do |config|
     vb.memory = 6000
   end
 
-  ## TODO: add rules to allow access to vagrant ports from your local machine
+  # dashboard
+  config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+
+  # Map OpenStack ports to same number prefixed with 5
+  [
+    8774, # nova
+    8776, # cinder
+    8778, # placement
+    9292, # image
+    9696, # neutron
+    5000 # keystone
+  ].each do |p|
+    config.vm.network "forwarded_port", guest: p, host: p
+  end
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa -q
