@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.box = "centos/7"
 
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant"
 
   config.vm.provider "virtualbox" do |vb|
     vb.cpus = 4
@@ -28,6 +28,6 @@ Vagrant.configure(2) do |config|
     sudo systemctl disable NetworkManager
     sudo systemctl stop NetworkManager
 
-    packstack --answer-file=answers.txt
+    packstack --answer-file=/vagrant/answers.txt
   SHELL
 end
