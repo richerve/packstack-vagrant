@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.cpus = 4
-    vb.memory = "8192"
+    vb.memory = 6000
   end
 
   ## TODO: add rules to allow access to vagrant ports from your local machine
